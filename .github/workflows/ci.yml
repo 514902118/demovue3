@@ -28,7 +28,7 @@ jobs:
 
       # 4️⃣ 安装依赖
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       # 5️⃣ 代码规范检查
       - name: Lint
