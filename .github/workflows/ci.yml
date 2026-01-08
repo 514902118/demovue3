@@ -1,0 +1,39 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ 拉取代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ 设置 Node 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 3️⃣ 安装 pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      # 4️⃣ 安装依赖
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5️⃣ 代码规范检查
+      - name: Lint
+        run: pnpm lint
+
+      # 6️⃣ 构建项目
+      - name: Build
+        run: pnpm build
